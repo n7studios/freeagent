@@ -1,0 +1,21 @@
+{
+    "name": "agencycore/freeagent",
+    "description": "PHP wrapper for FreeAgent REST API",
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Matt Davies",
+            "email": "matt@agencycore.co.uk"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "FreeAgent\\": "src/FreeAgent" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Accounting\\": "../accounting/src/Accounting" }
+    },
+    "require": {
+        "agencycore/accounting": "1.0.*"
+    }
+}
