@@ -2,7 +2,7 @@
     "name": "agencycore/freeagent",
     "description": "PHP wrapper for FreeAgent REST API",
     "license": "MIT",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "authors": [
         {
             "name": "Matt Davies",
@@ -14,5 +14,6 @@
     },
     "require": {
         "agencycore/accounting": "1.0.*"
-    }
+    },
+    "minium-stability": "stable"
 }
