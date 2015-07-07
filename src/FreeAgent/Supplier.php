@@ -53,14 +53,14 @@ class Supplier extends AccountingSupplier
             $supplier = new $class;
             $supplier->id       = basename( $object->url );
             $supplier->name     = $object->organisation_name;
-            $supplier->contact  = $object->first_name . ' ' . $object->last_name;
-            $supplier->email    = isset( $object->email )    ? $object->email    : null;
-            $supplier->phone    = isset( $object->phone )    ? $object->phone    : null;
-            $supplier->website  = isset( $object->website )  ? $object->website  : null;
-            $supplier->address  = isset( $object->address1 ) ? $object->address1 : null;
-            $supplier->town     = isset( $object->town )     ? $object->town     : null;
-            $supplier->postcode = isset( $object->postcode ) ? $object->postcode : null;
-            $supplier->country  = isset( $object->country )  ? $object->country  : null;
+            $supplier->contact  = isset( $object->first_name ) ? $object->first_name . ' ' . $object->last_name : null;
+            $supplier->email    = isset( $object->email )      ? $object->email    : null;
+            $supplier->phone    = isset( $object->phone )      ? $object->phone    : null;
+            $supplier->website  = isset( $object->website )    ? $object->website  : null;
+            $supplier->address  = isset( $object->address1 )   ? $object->address1 : null;
+            $supplier->town     = isset( $object->town )       ? $object->town     : null;
+            $supplier->postcode = isset( $object->postcode )   ? $object->postcode : null;
+            $supplier->country  = isset( $object->country )    ? $object->country  : null;
             $decode[] = $supplier;
         }
         return $single ? $decode[0] : $decode;
