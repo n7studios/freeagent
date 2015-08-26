@@ -28,7 +28,7 @@ class Invoice extends AccountingInvoice
         	'due_on'                => self::apiDate( $this->due ),
         	'payment_terms_in_days' => $this->terms,
         	'contact'               => isset( $this->customer->id ) ? $this->customer->id : $this->customerId,
-        	'comments'              => $this->notes,
+        	'comments'              => $this->po ? 'PO: ' . $this->po : '',
         	'invoice_items'         => array()
         );
         foreach ( $this->items as $item )
