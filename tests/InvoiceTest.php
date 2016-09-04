@@ -11,17 +11,21 @@ class InvoiceTest extends TestCase
         $customers = $this->api->find( 'customer' );
         
         $invoice = new Invoice;
-        $invoice->issued   = '2015-07-02 22:44:00';
-        $invoice->due      = '2015-08-02 22:44:00';
-        $invoice->terms    = 30;
-        $invoice->customer = $customers[0];
-        $invoice->currency = 'GBP';
-        $invoice->notes    = 'Project #P123';
+        $invoice->issued            = '2015-07-02 22:44:00';
+        $invoice->due               = '2015-08-02 22:44:00';
+        $invoice->terms             = 30;
+        $invoice->customer          = $customers[0];
+        $invoice->currency          = 'GBP';
+        $invoice->ec_status         = 'Non-EC';
+        $invoice->place_of_supply   = 'GB';
+        $invoice->notes             = 'Project #P123';
         
         $item = new Item;
-        $item->description = 'Example';
-        $item->quantity    = 10;
-        $item->price       = 100;
+        $item->type         = 'Products';
+        $item->description  = 'Example';
+        $item->quantity     = 10;
+        $item->price        = 100;
+        $item->tax_rate     = 20;
         
         $invoice->items[] = $item;
         
