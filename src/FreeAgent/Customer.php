@@ -49,11 +49,20 @@ class Customer extends AccountingCustomer
         $data   = $single ? [ $data->contact ] : $data->contacts;
         foreach ( $data as $object )
         {
+            // Not all contacts will have a first and/or last name, if none was specified
+            $contact = '';
+            if ( isset( $object->first_name ) ) {
+                $contact .= $object->first_name;
+            }
+            if ( isset( $object->last_name ) ) {
+                $contact .= ( ! empty( $contact ) ? ' ' : '' ) . $object->last_name;
+            }
+
             $class = __CLASS__;
             $customer = new $class;
             $customer->id       = basename( $object->url );
             $customer->name     = $object->organisation_name;
-            $customer->contact  = $object->first_name . ' ' . $object->last_name;
+            $customer->contact  = $contact;
             $customer->email    = isset( $object->email )    ? $object->email    : null;
             $customer->phone    = isset( $object->phone )    ? $object->phone    : null;
             $customer->website  = isset( $object->website )  ? $object->website  : null;
@@ -67,7 +76,7 @@ class Customer extends AccountingCustomer
     }
     
     /*
-     * Get unique id after object creationg
+     * Get unique id after object creation
      *
      */
     public static function uid( \Accounting\Interfaces\Model $model, $data )
