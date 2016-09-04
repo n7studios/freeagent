@@ -29,15 +29,28 @@ class Invoice extends AccountingInvoice
         	'payment_terms_in_days' => $this->terms,
         	'contact'               => isset( $this->customer->id ) ? $this->customer->id : $this->customerId,
         	'comments'              => $this->po ? 'PO: ' . $this->po : $this->notes,
+            'currency'              => ( isset( $this->currency ) ? $this->currency : '' ),
         	'invoice_items'         => array()
         );
+
+        // If EC Status is defined, set it now
+        if ( isset( $this->ec_status ) ) {
+            $data['ec_status'] = $this->ec_status;
+        }
+
+        // If Place of Supply is defined, set it now
+        if ( isset( $this->place_of_supply ) ) {
+            $data['place_of_supply'] = $this->place_of_supply;
+        }
+
         foreach ( $this->items as $item )
         {
         	$data['invoice_items'][] = array(
-            	'description' => $item->description,
-            	'quantity'    => $item->quantity,
-            	'item_type'   => 'Hours',
-            	'price'       => $item->price,
+            	'description'      => $item->description,
+            	'quantity'         => $item->quantity,
+            	'item_type'        => $item->type ? $item->type : 'Hours',
+            	'price'            => $item->price,
+                'sales_tax_rate'   => $item->tax_rate ? $item->tax_rate : 0,
         	);
         }
         return [ 'invoice' => $data ];
@@ -73,6 +86,7 @@ class Invoice extends AccountingInvoice
                 	$item = new Item;
                 	$item->description = $invoiceItem->description;
                 	$item->quantity    = $invoiceItem->quantity;
+                    $item->item_type   = $invoiceItem->type;
                 	$item->price       = $invoiceItem->price;	
                 	$invoice->items[] = $item;
                 }
